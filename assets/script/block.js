@@ -39,7 +39,7 @@ cc.Class({
 
     setTouch: function () {
         this.node.on('touchstart', function (event) {
-            cc.log('touchstart')
+            // cc.log('touchstart')
             this.posBlock = this.node.getPosition()
             this.getPosBlock()
             this.node_click.active = true
@@ -66,11 +66,11 @@ cc.Class({
             //cc.log('touchmove')
         }, this);
         this.node.on('touchend', function (event) {
-            cc.log('touchend')
+            // cc.log('touchend')
             this.touchEnd()
         }, this);
         this.node.on('touchcancel', function (event) {
-            cc.log('touchcancel')
+            // cc.log('touchcancel')
             this.touchEnd()
         }, this);
     },
@@ -116,8 +116,8 @@ cc.Class({
     getPosBlock: function () {
         var posMin = cc.v2(this.xx, this.yy)
         var posMax = cc.v2(this.xx, this.yy)
-        cc.log('min_x:' + posMin.x + ' min_y:' + posMin.y)
-        cc.log('max_x:' + posMax.x + ' max_y:' + posMax.y)
+        // cc.log('min_x:' + posMin.x + ' min_y:' + posMin.y)
+        // cc.log('max_x:' + posMax.x + ' max_y:' + posMax.y)
 
         if (this.blockType == '1_2' || this.blockType == '1_3') {
             for (let i = 1; i < 10; i++) {
@@ -165,7 +165,7 @@ cc.Class({
         this.posBlockMin = this.getBlockPos(posMin)
         this.posBlockMax = this.getBlockPos(posMax)
         //cc.log('min_x:'+posMin.x+' min_y:'+posMin.y)
-        cc.log('posBlockMax_x:' + this.posBlockMax.x + ' posBlockMax_y:' + this.posBlockMax.y)
+        // cc.log('posBlockMax_x:' + this.posBlockMax.x + ' posBlockMax_y:' + this.posBlockMax.y)
     },
 
     //得到block块的二维数据角标
@@ -241,7 +241,7 @@ cc.Class({
         var posBegin = cc.v2(game.blockParent.width / 2, game.blockParent.width / 2)
         var pos = cc.v2(arr_pos.x * (game.block_WH + game.f_jiange) - posBegin.x + game.f_jiange, arr_pos.y * (game.block_WH + game.f_jiange) - posBegin.y + game.f_jiange)
         this.node.setPosition(pos)
-        cc.log('xx:' + arr_pos.x + ' yy:' + arr_pos.y + ' pos.x:' + pos.x + ' pos.y:' + pos.y)
+        // cc.log('xx:' + arr_pos.x + ' yy:' + arr_pos.y + ' pos.x:' + pos.x + ' pos.y:' + pos.y)
     },
 
     //通过二维数组坐标，返回在父节点的位置坐标

@@ -66,9 +66,7 @@ cc.Class({
     },
 
     onLoad() {
-        this.FBL = cc.director.getWinSizeInPixels()
-        cc.log('width:' + this.FBL.width + '_height:' + this.FBL.height)
-
+  
         this.canEffect = true//是否可以播放音效
         this.canMusic = true//是否可以播放音乐
         this.maxLevel = 10
@@ -109,10 +107,6 @@ cc.Class({
         if (this.canMusic) {
             this.audioBg = cc.audioEngine.play(this.audio_bg[0], true, 1)
         }
-
-        this.skinContent.scale = (this.FBL.width / 720)
-        this.levelContent.parent.scale = (this.FBL.width / 720)
-        this.nodeOver.getChildByName('sp_title').scale = (this.FBL.width / 720);
 
     },
 
@@ -205,7 +199,7 @@ cc.Class({
 
     logArrBlock: function () {
         for (let i = 5; i >= 0; i--) {
-            cc.log(this.arrBlock[i])
+            // cc.log(this.arrBlock[i])
         }
     },
 
@@ -623,10 +617,10 @@ cc.Class({
     initBtnPos: function () {
         var nodeMenu = this.nodeBtnPlaying.getChildByName('btnMenu_playing')
         var pos_btnMenu = cc.v2(nodeMenu.x, nodeMenu.y)
-        this.nodeBtnPlaying.getChildByName('btnHome_playing').setPosition(cc.v2(pos_btnMenu.x, pos_btnMenu.y))
-        this.nodeBtnPlaying.getChildByName('btnLevels_playiny').setPosition(cc.v2(pos_btnMenu.x, pos_btnMenu.y))
-        this.nodeBtnPlaying.getChildByName('btnSkin_playiny').setPosition(cc.v2(pos_btnMenu.x, pos_btnMenu.y))
-        this.nodeBtnPlaying.getChildByName('btnSetting_playiny').setPosition(cc.v2(pos_btnMenu.x, pos_btnMenu.y))
+        // this.nodeBtnPlaying.getChildByName('btnHome_playing').setPosition(cc.v2(pos_btnMenu.x, pos_btnMenu.y))
+        // this.nodeBtnPlaying.getChildByName('btnLevels_playiny').setPosition(cc.v2(pos_btnMenu.x, pos_btnMenu.y))
+        // this.nodeBtnPlaying.getChildByName('btnSkin_playiny').setPosition(cc.v2(pos_btnMenu.x, pos_btnMenu.y))
+        // this.nodeBtnPlaying.getChildByName('btnSetting_playiny').setPosition(cc.v2(pos_btnMenu.x, pos_btnMenu.y))
         this.nodeBtnPlaying.getChildByName('btnMenuClose_playing').active = false
         this.nodeBtnPlaying.getChildByName('btnMenuHint_playing').active = true
         this.nodeBtnPlaying.getChildByName('btnMenuReplay_playing').active = true
@@ -698,7 +692,8 @@ cc.Class({
         this.blockParent.width = this.block_WH * 6 + this.f_jiange * 7
         this.blockParent.height = this.block_WH * 6 + this.f_jiange * 7
 
-        this.blockParent.scale = 0.95 * (this.FBL.width / 720)
+        // this.blockParent.scale = 0.95 * (this.FBL.width / 720)
+        this.blockParent.scale = 0.95
 
         var i_num = 10
 
