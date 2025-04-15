@@ -89,8 +89,8 @@ cc.Class({
         this.initBtnPos()
         this.setBlockParent()
         //this.addBlock_test()
-        for (let i = 0; i < gameDate.arr_blockType[this.i_level - 1].length; i++) {
-            this.addBlock(gameDate.arr_blockType[this.i_level - 1][i], gameDate.arr_blockPos[this.i_level - 1][i], i)
+        for (let i = 0; i < gameData.arr_blockType[this.i_level - 1].length; i++) {
+            this.addBlock(gameData.arr_blockType[this.i_level - 1][i], gameData.arr_blockPos[this.i_level - 1][i], i)
         }
         this.getArrBlock()
         this.refreshLevel()
@@ -112,7 +112,8 @@ cc.Class({
 
     //刷新关卡数据的显示
     refreshLevel: function () {
-        this.nodePlaying.getChildByName('spLevel').getChildByName('labelLevel').getComponent(cc.Label).string = this.i_level
+        let mask=this.nodePlaying.getChildByName('mask')
+        mask.getChildByName('spLevel').getChildByName('labelLevel').getComponent(cc.Label).string = this.i_level
         this.nodeOver.getChildByName('spLevel').getChildByName('labelLevel').getComponent(cc.Label).string = this.i_level - 1
     },
 
@@ -361,8 +362,8 @@ cc.Class({
                 this.onBlockKilled(children[i])
             }
         }
-        for (let i = 0; i < gameDate.arr_blockType[this.i_level - 1].length; i++) {
-            this.addBlock(gameDate.arr_blockType[this.i_level - 1][i], gameDate.arr_blockPos[this.i_level - 1][i], i)
+        for (let i = 0; i < gameData.arr_blockType[this.i_level - 1].length; i++) {
+            this.addBlock(gameData.arr_blockType[this.i_level - 1][i], gameData.arr_blockPos[this.i_level - 1][i], i)
         }
         this.getArrBlock()
 
@@ -390,8 +391,8 @@ cc.Class({
                 }
             }
 
-            for (let i = 0; i < gameDate.arr_blockType[this.i_level - 1].length; i++) {
-                this.addBlock(gameDate.arr_blockType[this.i_level - 1][i], gameDate.arr_blockPos[this.i_level - 1][i], i)
+            for (let i = 0; i < gameData.arr_blockType[this.i_level - 1].length; i++) {
+                this.addBlock(gameData.arr_blockType[this.i_level - 1][i], gameData.arr_blockPos[this.i_level - 1][i], i)
             }
             this.getArrBlock()
 
@@ -429,7 +430,7 @@ cc.Class({
             for (let i = 0; i < children.length; i++) {
                 var js_block = children[i].getComponent('block')
                 if (js_block) {
-                    var pos_block_arr = gameDate.arr_blockPos[this.i_level - 1][i_num]
+                    var pos_block_arr = gameData.arr_blockPos[this.i_level - 1][i_num]
                     i_num++
                     var posParent = cc.v2(pos_block_arr.x * (this.block_WH + this.f_jiange), pos_block_arr.y * (this.block_WH + this.f_jiange))
                     children[i].setPosition(this.getPosZXJ(posParent))
@@ -443,7 +444,7 @@ cc.Class({
             for (let i = 0; i < children.length; i++) {
                 var js_block = children[i].getComponent('block')
                 if (js_block) {
-                    var pos_block_arr = gameDate.arr_blockPos_TiShi[this.i_level - 1][i_num]
+                    var pos_block_arr = gameData.arr_blockPos_TiShi[this.i_level - 1][i_num]
                     i_num++
                     var posParent = cc.v2(pos_block_arr.x * (this.block_WH + this.f_jiange), pos_block_arr.y * (this.block_WH + this.f_jiange))
                     children[i].setPosition(this.getPosZXJ(posParent))
@@ -473,7 +474,7 @@ cc.Class({
             for (let i = 0; i < children.length; i++) {
                 var js_block = children[i].getComponent('block')
                 if (js_block) {
-                    var pos_block_arr = gameDate.arr_blockPos[this.i_level - 1][i_num]
+                    var pos_block_arr = gameData.arr_blockPos[this.i_level - 1][i_num]
                     i_num++
                     var posParent = cc.v2(pos_block_arr.x * (this.block_WH + this.f_jiange), pos_block_arr.y * (this.block_WH + this.f_jiange))
                     children[i].setPosition(this.getPosZXJ(posParent))
@@ -499,8 +500,8 @@ cc.Class({
             this.nodePlaying.active = true
             this.nodeReady.active = false
 
-            for (let i = 0; i < gameDate.arr_blockType[this.i_level - 1].length; i++) {
-                this.addBlock(gameDate.arr_blockType[this.i_level - 1][i], gameDate.arr_blockPos[this.i_level - 1][i], i)
+            for (let i = 0; i < gameData.arr_blockType[this.i_level - 1].length; i++) {
+                this.addBlock(gameData.arr_blockType[this.i_level - 1][i], gameData.arr_blockPos[this.i_level - 1][i], i)
             }
             this.getArrBlock()
         } else if (str == 'toggle1') {//选中的是绚丽主题

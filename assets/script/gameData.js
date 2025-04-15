@@ -7,7 +7,7 @@ cc.Class({
     },
 
     onLoad() {
-        window.gameDate = this
+        window.gameData = this
         this.init()
     },
 
