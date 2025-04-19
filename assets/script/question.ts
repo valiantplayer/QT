@@ -82,9 +82,18 @@ export default class question extends cc.Component {
                  value: updated
                })
              });
-             this.showToast("✅ Perfect, unlock skin!");
-             //重新获取一次用户数据，这样就可以直接使用皮肤了
+            //重新获取一次用户数据，这样就可以直接使用皮肤了
              getAllUserDetails();
+             this.showToast("✅ Perfect, unlock skin!");
+             //刷新当前皮肤选择的透明度
+             let content= this.node.parent.getChildByName('scrollView').getChildByName('view').getChildByName('content')
+             if(this.skinType=="fish"){
+                let skinFishNode=content.getChildByName('node_skin_2').children;
+                skinFishNode[this.unlockSkinIndex].opacity=255;
+             }else if(this.skinType=="bg"){
+                let skinBgNode=content.getChildByName('node_skin_1').children;
+                skinBgNode[this.unlockSkinIndex].opacity=255;
+            }
              this.scheduleOnce(() => {
                 this.node.removeFromParent();
                 this.node.destroy();

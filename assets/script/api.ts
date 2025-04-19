@@ -20,5 +20,9 @@ export async function fetchQuestions(subject?: string, level?: string) {
     const data = await res.json();
     if (data.success) {
       setUserDetails(data.profile);
+      //获取用户的数据
+      console.log("用户的背景皮肤:"+data.profile.unlocked_backgrounds);
+      console.log("用户的鱼皮肤:"+data.profile.unlocked_fish_skins);
+      
     }
   }

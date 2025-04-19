@@ -535,6 +535,7 @@ cc.Class({
             || str == this.btnStr[5]  || str == this.btnStr[6]  || str == this.btnStr[7]  || str ==this.btnStr[8] || str == this.btnStr[9] ) {//选中的是主题皮肤
             // unlocked_backgrounds
             // unlocked_fish_skins
+            
             let bg_skin=getUserDetails().unlocked_backgrounds;
             for(let i=0;i<=9;i++){
                 if(str == this.btnStr[i]){
@@ -837,13 +838,13 @@ cc.Class({
                 if(bg_skin[i]){
                     skinBgNode[i].opacity=255;
                 }else{
-                    skinBgNode[i].opacity=170;
+                    skinBgNode[i].opacity=150;
             }
             for(let i=0;i<skinFishNode.length;i++){
                 if(fish_skin[i]){
                     skinFishNode[i].opacity=255;
                 }else{
-                    skinFishNode[i].opacity=150;
+                    skinFishNode[i].opacity=140;
             }
             }
         }
