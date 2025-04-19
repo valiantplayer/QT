@@ -1,8 +1,12 @@
-
+import question from "./question";
+import {getUserDetails} from "./userManager";
 cc.Class({
     extends: cc.Component,
-
     properties: {
+        question: {
+            default: null,
+            type: cc.Prefab
+        },
         nodeReady: {
             default: null,
             type: cc.Node
@@ -64,9 +68,12 @@ cc.Class({
             type: [cc.AudioClip]
         }
     },
-
     onLoad() {
-  
+        
+        this.btnStr=["101","102","103","104","105","106","107","108",
+            "109","110"]
+        this.fishStr=["201","202","203","204","205","206","207","208",
+                "209","210","211","212","213","214","215","216","217"]
         this.canEffect = true//是否可以播放音效
         this.canMusic = true//是否可以播放音乐
         this.maxLevel = 10
@@ -402,6 +409,7 @@ cc.Class({
             this.nodePlaying.active = false
             this.nodeReady.active = false
             this.nodeOver.active = false
+            this.refreshSkin();
         } else if (str == 'btnSetting_ready') {//Ready界面的setting按钮
             this.nodeSetting.active = true
         } else if (str == 'btnHome_playing') {//Playing界面的home按钮
@@ -508,10 +516,12 @@ cc.Class({
             this.skinContent.height = 1420
             this.skinContent.getChildByName('node_skin_1').active = true
             this.skinContent.getChildByName('node_skin_2').active = false
+            this.refreshSkin();
         } else if (str == 'toggle2') {//选中的是五彩鱼衣
             this.skinContent.height = 2400
             this.skinContent.getChildByName('node_skin_1').active = false
             this.skinContent.getChildByName('node_skin_2').active = true
+            this.refreshSkin();
         } else if (str == 'btnBack_skin') {//皮肤界面的返回按钮
             this.nodeSkin.active = false
             if (this.gameType == 0) {
@@ -521,42 +531,79 @@ cc.Class({
             } else if (this.gameType == 2) {
                 this.nodeOver.active = true
             }
-        } else if (str == '101' || str == '102' || str == '103' || str == '104' || str == '105'
-            || str == '106' || str == '107' || str == '108' || str == '109' || str == '110') {//选中的是主题皮肤
-            var i_skin = parseInt(str)
-            common.changeSkin(i_skin - 101)
-            this.xuanZhongSkin_1(i_skin - 101)
-            if (i_skin - 101 == 7) {//下雨天背景音乐
-                if (this.canMusic) {
-                    cc.audioEngine.stop(this.audioBg)
-                    this.audioBg = cc.audioEngine.play(this.audio_bg[2], true, 1)
-                }
-            } else if (i_skin - 101 == 3 || i_skin - 101 == 6) {//秋天背景音乐
-                if (this.canMusic) {
-                    cc.audioEngine.stop(this.audioBg)
-                    this.audioBg = cc.audioEngine.play(this.audio_bg[1], true, 1)
-                }
-            } else if (i_skin - 101 == 2) {//春天背景音乐
-                if (this.canMusic) {
-                    cc.audioEngine.stop(this.audioBg)
-                    this.audioBg = cc.audioEngine.play(this.audio_bg[3], true, 1)
-                }
-            } else if (i_skin - 101 == 4) {//冬天背景音乐
-                if (this.canMusic) {
-                    cc.audioEngine.stop(this.audioBg)
-                    this.audioBg = cc.audioEngine.play(this.audio_bg[4], true, 1)
-                }
-            } else {
-                if (this.canMusic) {
-                    cc.audioEngine.stop(this.audioBg)
-                    this.audioBg = cc.audioEngine.play(this.audio_bg[0], true, 1)
+        } else if (str == this.btnStr[0] || str == this.btnStr[1]  || str == this.btnStr[2]  || str == this.btnStr[3] || str == this.btnStr[4] 
+            || str == this.btnStr[5]  || str == this.btnStr[6]  || str == this.btnStr[7]  || str ==this.btnStr[8] || str == this.btnStr[9] ) {//选中的是主题皮肤
+            // unlocked_backgrounds
+            // unlocked_fish_skins
+            let bg_skin=getUserDetails().unlocked_backgrounds;
+            for(let i=0;i<=9;i++){
+                if(str == this.btnStr[i]){
+                    if(bg_skin[i]){//点了某个皮肤然后是true才开始换皮
+                        var i_skin = parseInt(str)
+                        common.changeSkin(i_skin - 101)
+                        this.xuanZhongSkin_1(i_skin - 101)
+                        if (i_skin - 101 == 7) {//下雨天背景音乐
+                            if (this.canMusic) {
+                            cc.audioEngine.stop(this.audioBg)
+                            this.audioBg = cc.audioEngine.play(this.audio_bg[2], true, 1)
+                        }
+                        } else if (i_skin - 101 == 3 || i_skin - 101 == 6) {//秋天背景音乐
+                            if (this.canMusic) {
+                            cc.audioEngine.stop(this.audioBg)
+                            this.audioBg = cc.audioEngine.play(this.audio_bg[1], true, 1)
+                        }
+                        } else if (i_skin - 101 == 2) {//春天背景音乐
+                            if (this.canMusic) {
+                            cc.audioEngine.stop(this.audioBg)
+                            this.audioBg = cc.audioEngine.play(this.audio_bg[3], true, 1)
+                        }
+                        } else if (i_skin - 101 == 4) {//冬天背景音乐
+                            if (this.canMusic) {
+                                cc.audioEngine.stop(this.audioBg)
+                                this.audioBg = cc.audioEngine.play(this.audio_bg[4], true, 1)
+                            }
+                        } else {
+                            if (this.canMusic) {
+                                cc.audioEngine.stop(this.audioBg)
+                                this.audioBg = cc.audioEngine.play(this.audio_bg[0], true, 1)
+                            }
+                        }
+                    }else{
+                        //开始答题
+                        const questionNode = cc.instantiate(this.question);
+                        //选中了某个皮肤
+                        questionNode.getComponent(question).skinType="bg";
+                        questionNode.getComponent(question).unlockSkinIndex=i;
+                        this.nodeSkin.addChild(questionNode);
+                    }
                 }
             }
-        } else if (str == '201' || str == '202' || str == '203' || str == '204' || str == '205'
-            || str == '206' || str == '207' || str == '208' || str == '209' || str == '210' || str == '211' || str == '212' || str == '213' || str == '214' || str == '215' || str == '216' || str == '217') {//选中的是鱼衣皮肤
-            var i_skin = parseInt(str)
-            this.xuanZhongSkin_2(i_skin - 201)
-            this.chengBlockHero(i_skin - 201 + 1)
+            
+        } else if (str == this.fishStr[0] || str == this.fishStr[1] || str ==this.fishStr[2] || str == this.fishStr[3] || str == this.fishStr[4]
+            || str == this.fishStr[5] || str == this.fishStr[6] || str == this.fishStr[7]|| str == this.fishStr[8] || str == this.fishStr[9]
+            || str == this.fishStr[10] || str ==this.fishStr[11]|| str ==this.fishStr[12]|| str == this.fishStr[13] || str == this.fishStr[14]|| str ==this.fishStr[15] || str == this.fishStr[16]) {
+                //选中的是鱼衣皮肤
+                // unlocked_fish_skins
+            let fish_skin=getUserDetails().unlocked_fish_skins;
+            // let fish_skin=[false,false,false,false,false,
+            //     false,false,false,false,false]
+            for(let i=0;i<17;i++){
+                if(str == this.fishStr[i]){
+                    if(fish_skin[i]){//点了某个皮肤然后是true才开始换皮
+                        var i_skin = parseInt(str)
+                        this.xuanZhongSkin_2(i_skin - 201)
+                        this.chengBlockHero(i_skin - 201 + 1)
+                    }else{
+                         //开始答题
+                         const questionNode = cc.instantiate(this.question);
+                         //选中了某个皮肤
+                         questionNode.getComponent(question).unlockSkinIndex=i;
+                         questionNode.getComponent(question).skinType="fish";
+                         this.nodeSkin.addChild(questionNode);
+                    }
+                }
+            }
+            
         } else if (str == 'btnHome_level') {//关卡界面的home按钮
             this.nodeLevels.active = false
             this.nodeSkin.active = false
@@ -772,6 +819,32 @@ cc.Class({
             if (this.timeScore >= 60) {//每秒钟执行一次
                 this.timeScore = 0
                 this.socreCurr++
+            }
+        }
+    },
+    //刷新皮肤界面
+    refreshSkin:function(){
+        let bg_skin=getUserDetails().unlocked_backgrounds;
+        let fish_skin=getUserDetails().unlocked_fish_skins;
+            // let bg_skin=[true,false,false,false,false,
+            //     false,false,false,false,false]
+            // let fish_skin=[true,false,false,false,false,
+            //     false,false,false,false,false,
+            //     false,false,false,false,false,false,false]
+            let skinBgNode=this.skinContent.getChildByName('node_skin_1').children;
+            let skinFishNode=this.skinContent.getChildByName('node_skin_2').children;
+            for(let i=0;i<skinBgNode.length;i++){
+                if(bg_skin[i]){
+                    skinBgNode[i].opacity=255;
+                }else{
+                    skinBgNode[i].opacity=170;
+            }
+            for(let i=0;i<skinFishNode.length;i++){
+                if(fish_skin[i]){
+                    skinFishNode[i].opacity=255;
+                }else{
+                    skinFishNode[i].opacity=150;
+            }
             }
         }
     },

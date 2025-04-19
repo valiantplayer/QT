@@ -1,6 +1,6 @@
 const { ccclass, property } = cc._decorator;
 
-import { fetchQuestions } from "./api";
+import { fetchQuestions, getAllUserDetails } from "./api";
 
 @ccclass
 export default class common extends cc.Component {
@@ -39,9 +39,9 @@ export default class common extends cc.Component {
     this.playShuiBoWen();
     this.playFish();
     this.getQuestions();
+    this.getUserDetail();
     this.timeRandomShuiBoWen = 300 + Math.random() * 600;
     this.timeRandomFish = 480 + Math.random() * 800;
-
     this.allParticleHide();
     this.allNodeHide();
     this.node_arr[0].active = true;
@@ -161,8 +161,9 @@ export default class common extends cc.Component {
     return 90 - angle;
   }
   getQuestions(){
-    fetchQuestions("English", "University").then(questions => {
-      console.log("题库：", questions);
-    });
+    fetchQuestions("English", "University");
+  }
+  getUserDetail(){
+    getAllUserDetails();
   }
 }
