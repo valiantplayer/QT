@@ -63,6 +63,8 @@ export default class question extends cc.Component {
              }
            }
            if (allCorrect) {
+            console.log("如果所有题目正确，先获取一次最新的信息");
+            getAllUserDetails();      
             let user=getUserDetails();//拿到当前的用户数据
             let updated;
             let field;
